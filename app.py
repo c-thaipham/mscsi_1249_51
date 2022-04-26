@@ -48,7 +48,7 @@ search_by = st.radio(
 if search_by == 'IP Address':
     pass
 if search_by in ['Source Number', 'Destination Number']:
-    device_placeholder == "+123456789"
+    device_placeholder = "+123456789"
 
 if st.button('Search'):
 
