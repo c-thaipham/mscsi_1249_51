@@ -48,7 +48,7 @@ if st.button('Search'):
     for i, d in enumerate(devices):
         if i < 5:
             with st.expander(f"{d['description']}"):
-                
+                st.write("Placeholder")
                 
 
                 # device_endpoint = d["url"]
