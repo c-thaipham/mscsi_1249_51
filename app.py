@@ -17,12 +17,13 @@ ems_system = st.selectbox('Choose an EMS System',
 )
 
 request_method = st.selectbox('Choose a Request Method', ('GET', 'POST', 'PUT'))
-api_endpoint = st.text_input('API Endpoint', placeholder='ovoc/v1/topology/statistics/devices')
+default_api_endpoint = 'ovoc/v1/topology/devices'
+api_endpoint = st.text_input('API Endpoint', placeholder=default_api_endpoint)
 
 basicAuthCredentials = (st.secrets["ovoc_username"], st.secrets["ovoc_password"])
 
 if api_endpoint == '':
-    api_endpoint='ovoc/v1/topology/statistics/devices'
+    api_endpoint=default_api_endpoint
 
 if st.button('Fetch Data'):
 
