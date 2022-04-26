@@ -3,11 +3,20 @@ import requests
 import json
 from PIL import Image
 
-logo = Image.open('logo.png')
-
 def get_data(target, endpoint):
     response = requests.get(f"{target}{endpoint}", auth=basicAuthCredentials, verify=False)
     return response.json()
+
+hide_menu_style = """
+        <style>
+        #MainMenu {visibility: hidden;}
+        </style>
+        """
+st.markdown(hide_menu_style, unsafe_allow_html=True)
+
+logo = Image.open('logo.png')
+
+
 
 st.set_page_config(page_title='OVOC Audiocodes API', page_icon=logo)
 st.header("OVOC Audiocodes API")
