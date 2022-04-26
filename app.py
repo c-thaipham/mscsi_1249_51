@@ -50,8 +50,8 @@ if st.button('Search'):
             with st.expander(f"{d['description']}"):
                 st.text("Device Info")
                 
-                ip_address = d["ipAddress"]
-                st.json(ip_address)
+                
+                st.json(d)
                 
                 st.text("Calls Info")
                 
