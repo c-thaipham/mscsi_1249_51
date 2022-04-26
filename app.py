@@ -4,7 +4,7 @@ import json
 from PIL import Image
 
 logo = Image.open('logo.png')
-st.image(logo, width=2, use_column_width='auto')
+st.image(logo, width=2, use_column_width='always')
 st.header("OVOC Audiocodes API")
 
 ems_system = st.selectbox('Choose an EMS System',
