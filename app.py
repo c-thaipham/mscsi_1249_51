@@ -45,9 +45,9 @@ if st.button('Search'):
 
     # st.subheader(f"Available Devices ({len(devices)} search results)")
     col1, col2, col3 = st.columns(3)
-    col1.metric("Devices", f"{len(devices)} matched")
-    col2.metric("Source Numbers", f"{0} matched")
-    col3.metric("Destination Numbers", "10 matched")
+    col1.metric("Devices", f"{len(devices)}")
+    col2.metric("Source Numbers", f"{0}")
+    col3.metric("Destination Numbers", "10")
 
     for i, d in enumerate(devices):
         if i < 5:
