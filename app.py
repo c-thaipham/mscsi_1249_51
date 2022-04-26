@@ -4,6 +4,18 @@ import json
 
 st.header("OVOC Audiocodes API")
 
+ems_system = st.selectbox('Choose an EMS System',
+(
+    'https://tampa-audiocodes-02.chtrse.com',
+    'https://tampa-audiocodes-04.chtrse.com',
+    'https://tampa-audiocodes-03.chtrse.com',
+    'https://austx-audiocodeshicap.chtrse.com',
+    'https://austx-audiocodeshv.chtrse.com',
+    'https://austx-audiocodestrunk.chtrse.com',
+    'https://austx-ac-overflow.chtrse.com',
+    'https://austx-ac-cluster.dmz.chtrse.com')
+)
+
 request_method = st.selectbox('Choose a Request Method', ('GET', 'POST', 'PUT'))
 api_endpoint = st.text_input('API Endpoint', placeholder='ovoc/v1/topology/statistics/devices')
 
