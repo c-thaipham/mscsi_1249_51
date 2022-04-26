@@ -29,14 +29,14 @@ default_api_endpoint = '/ovoc/v1/topology/devices'
 basicAuthCredentials = (st.secrets["ovoc_username"], st.secrets["ovoc_password"])
 
 data = get_data(ems_system, default_api_endpoint)
-
 device = st.text_input("Search a Device", placeholder="69.58.145.105")
+devices = data["devices"]
 
 if st.button('Search'):
 
-    st.subheader(f"Available Devices ({data["devices"].length} search results)")
+    st.subheader(f"Available Devices ({devices.length} search results)")
 
-    for i, d in enumerate(data["devices"]):
+    for i, d in enumerate(devices):
         if i < 5:
             with st.expander(f"{d['description']}"):
                 device_endpoint = d["url"]
