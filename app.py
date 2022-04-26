@@ -37,12 +37,18 @@ default_api_endpoint = '/ovoc/v1/topology/devices'
 calls_api_endpoint = '/ovoc/v1/callsMonitor/calls/'
 basicAuthCredentials = (st.secrets["ovoc_username"], st.secrets["ovoc_password"])
 
+device_placeholder = "11.11.111.111"
 devices = get_data(ems_system, default_api_endpoint)["devices"]
 calls = get_data(ems_system, calls_api_endpoint)["calls"]
-device = st.text_input("Search a Device", placeholder="11.11.111.111")
+device = st.text_input("Search a Device", placeholder=device_placeholder)
 search_by = st.radio(
      "Search by",
      ('IP Address', 'Source Number', 'Destination Number'))
+    
+if search_by == 'IP Address':
+    pass
+if search_by in ['Source Number', 'Destination Number']:
+    device_placeholder == "+123456789"
 
 if st.button('Search'):
 
