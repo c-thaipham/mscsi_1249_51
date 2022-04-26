@@ -43,7 +43,7 @@ device = st.text_input("Search a Device", placeholder="69.58.145.105")
 
 if st.button('Search'):
 
-    st.subheader(f"Search Results)")
+    st.subheader(f"Search Results")
     col1, col2, col3 = st.columns(3)
     col1.metric("Devices", f"{len(devices)}")
     col2.metric("Source Numbers", f"{0}")
