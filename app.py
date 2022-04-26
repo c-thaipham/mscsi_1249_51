@@ -34,11 +34,12 @@ ems_system = st.selectbox('Choose an EMS System',
 
 request_method = 'GET'
 default_api_endpoint = '/ovoc/v1/topology/devices'
+calls_api_endpoint = '/ovoc/v1/callsMonitor/calls/'
 basicAuthCredentials = (st.secrets["ovoc_username"], st.secrets["ovoc_password"])
 
-data = get_data(ems_system, default_api_endpoint)
+devices = get_data(ems_system, default_api_endpoint)["devices"]
+calls = get_data(ems_system, calls_api_endpoint)["calls"]
 device = st.text_input("Search a Device", placeholder="69.58.145.105")
-devices = data["devices"]
 
 if st.button('Search'):
 
@@ -47,8 +48,15 @@ if st.button('Search'):
     for i, d in enumerate(devices):
         if i < 5:
             with st.expander(f"{d['description']}"):
-                st.write('Call Info')
-                # ip_address = d["ipAddress"]
+                with st.expander("Device Info"):
+                    st.write("Device Info")
+                with st.expander("IP Address"):
+                    ip_address = d["ipAddress"]
+                    st.json(ip_address)
+                with st.expander("Calls Info"):
+                    st.write("Calls Info")
+                
+
                 # device_endpoint = d["url"]
                 # detailed_data = get_data(ems_system, device_endpoint)
                 # st.json(detailed_data)
