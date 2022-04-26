@@ -53,6 +53,9 @@ if st.button('Search'):
         if i < 5:
             with st.expander(f"{d['description']}"):
                 st.write("Placeholder")
+
+                with st.container():
+                    st.write("IP Address")
                 
 
                 # device_endpoint = d["url"]
