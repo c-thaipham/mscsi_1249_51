@@ -53,7 +53,7 @@ if st.button('Search'):
         if i < 5:
             with st.expander(f"{d['description']}"):
                 with st.container():
-                    st.json(d["url"])
+                    st.json(d)
                 
 
                 # device_endpoint = d["url"]
