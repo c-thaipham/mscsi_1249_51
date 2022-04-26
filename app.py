@@ -34,7 +34,7 @@ devices = data["devices"]
 
 if st.button('Search'):
 
-    st.subheader(f"Available Devices ({devices.length} search results)")
+    st.subheader(f"Available Devices ({len(devices)} search results)")
 
     for i, d in enumerate(devices):
         if i < 5:
