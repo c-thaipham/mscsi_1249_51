@@ -7,7 +7,6 @@ st.header("OVOC Audiocodes API")
 request_method = st.selectbox('Choose a Request Method', ('GET', 'POST', 'PUT'))
 api_endpoint = st.text_input('API Endpoint', placeholder='ovoc/v1/topology/statistics/devices')
 
-# basicAuthCredentials = ('nsm_svc_acct', '@Charter2021')
 basicAuthCredentials = (st.secrets["ovoc_username"], st.secrets["ovoc_password"])
 
 if api_endpoint == '':
