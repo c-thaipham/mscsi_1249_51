@@ -1,7 +1,0 @@
-ovoc_username = "nsm_svc_acct"
-ovoc_password = "@Charter2021"
-
-[theme]
-base="light"
-primaryColor="#035397"
-textColor="#001e6c"
