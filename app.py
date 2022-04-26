@@ -1,7 +1,10 @@
 import streamlit as st
 import requests
 import json
+from PIL import Image
 
+logo = Image.open('logo.png')
+st.image(logo)
 st.header("OVOC Audiocodes API")
 
 ems_system = st.selectbox('Choose an EMS System',
