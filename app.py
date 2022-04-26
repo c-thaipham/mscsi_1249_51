@@ -4,7 +4,12 @@ import json
 from PIL import Image
 
 logo = Image.open('logo.png')
-st.image(logo, width=1, use_column_width='auto')
+
+def get_data(target, endpoint):
+    response = requests.get(f"{target}{endpoint}", auth=basicAuthCredentials, verify=False)
+    return response.json()
+
+st.set_page_config(page_title='OVOC Audiocodes API', page_icon=logo)
 st.header("OVOC Audiocodes API")
 
 ems_system = st.selectbox('Choose an EMS System',
@@ -19,19 +24,21 @@ ems_system = st.selectbox('Choose an EMS System',
     'https://austx-ac-cluster.dmz.chtrse.com')
 )
 
-request_method = st.selectbox('Choose a Request Method', ('GET', 'POST', 'PUT'))
-default_api_endpoint = 'ovoc/v1/topology/devices'
-api_endpoint = st.text_input('API Endpoint', placeholder=default_api_endpoint)
-
+request_method = 'GET'
+default_api_endpoint = '/ovoc/v1/topology/devices'
 basicAuthCredentials = (st.secrets["ovoc_username"], st.secrets["ovoc_password"])
 
-if api_endpoint == '':
-    api_endpoint=default_api_endpoint
+data = get_data(ems_system, default_api_endpoint)
 
-if st.button('Fetch Data'):
+device = st.text_input("Search a Device", placeholder="69.58.145.105")
 
-    if request_method == 'GET':
-        response = requests.get(f"https://tampa-audiocodes-02.chtrse.com/{api_endpoint}", auth=basicAuthCredentials, verify=False)
-        data = response.json()
-        st.json(data)
-        st.download_button("Download data", data=json.dumps(data), file_name="data.json", mime="text/json")
+if st.button('Search'):
+
+    st.subheader("Available Devices")
+
+    for d in data["devices"]:
+        with st.expander(f"{d['description']}"):
+            device_endpoint = d["url"]
+            detailed_data = get_data(ems_system, device_endpoint)
+            st.json(detailed_data)
+            st.download_button("Download data", data=json.dumps(detailed_data), file_name="data.json", mime="text/json")
