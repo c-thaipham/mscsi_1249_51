@@ -43,7 +43,11 @@ device = st.text_input("Search a Device", placeholder="69.58.145.105")
 
 if st.button('Search'):
 
-    st.subheader(f"Available Devices ({len(devices)} search results)")
+    # st.subheader(f"Available Devices ({len(devices)} search results)")
+    col1, col2, col3 = st.columns(3)
+    col1.metric("", f"{len(devices)}", "Devices")
+    col2.metric("", "9", "Source Numbers")
+    col3.metric("", "12", "Destination Numbers")
 
     for i, d in enumerate(devices):
         if i < 5:
