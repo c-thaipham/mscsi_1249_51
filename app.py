@@ -16,9 +16,7 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 logo = Image.open('logo.png')
 
-
-
-st.set_page_config(page_title='OVOC Audiocodes API', page_icon=logo)
+# st.set_page_config(page_title='OVOC Audiocodes API', page_icon=logo)
 st.header("OVOC Audiocodes API")
 
 ems_system = st.selectbox('Choose an EMS System',
