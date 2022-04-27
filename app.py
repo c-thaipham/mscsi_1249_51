@@ -89,8 +89,9 @@ if st.button('Search'):
                 if device_ip_address == device:
                     with st.expander(f"{d['description']}"):
                         with st.container():
+                            st.subheader(f"Device ID: {d['id']}")
                             st.subheader(f"IP Address: {device_ip_address}")
-                            st.json(device_data)
+                            
                     break
 
 
