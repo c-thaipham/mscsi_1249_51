@@ -45,7 +45,7 @@ search_by = st.radio(
      "Search by",
      ('IP Address', 'Source Number', 'Destination Number'))
     
-default_ip_address = "208.125.140.98"
+default_ip_address = "71.78.243.74"
     
 if search_by == 'IP Address':
     pass
@@ -70,7 +70,7 @@ if st.button('Search'):
             with st.expander(f"{d['description']}"):
                 with st.container():
                     st.subheader(f"IP Address: {ip_address}")
-                    break
+            break
 
 
                 # st.download_button("Download data", data=json.dumps(detailed_data), file_name="data.json", mime="text/json")
