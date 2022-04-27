@@ -78,7 +78,7 @@ if st.button('Search'):
             device = default_ip_address
 
         if not validate_ip_address(device):
-            display_custom_text("Invalid IP Address")
+            display_custom_text("Please enter a valid IP Address")
         else:
             # Find IP Address of the device and display it
             for d in devices:
@@ -90,6 +90,7 @@ if st.button('Search'):
                     with st.expander(f"{d['description']}"):
                         with st.container():
                             st.subheader(f"IP Address: {device_ip_address}")
+                            st.json(device_data)
                     break
 
 
