@@ -1,4 +1,5 @@
 from ipaddress import ip_address
+from multiprocessing.sharedctypes import Value
 import streamlit as st
 import requests
 import json
@@ -9,7 +10,11 @@ def get_data(target, endpoint):
     return response.json()
 
 def validate_ip_address(address):
-    return ip_address(address)
+    try:
+        return ip_address(address)
+    except ValueError:
+        return False
+        
         
     
 
@@ -67,7 +72,7 @@ if st.button('Search'):
     if search_by == 'IP Address':
         if device is None or device == '':
             device = default_ip_address
-            
+
         if not validate_ip_address(device):
             st.write("Invalid IP Address")
         else:
