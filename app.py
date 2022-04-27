@@ -103,7 +103,6 @@ if st.button('Search'):
                                     if call_num < 3:
                                         call_num += 1
                                         st.json(call_data)
-                                        continue
                                     break
                     break
 
