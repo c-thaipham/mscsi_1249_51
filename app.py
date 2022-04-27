@@ -71,4 +71,5 @@ if st.button('Search'):
 
                 # st.download_button("Download data", data=json.dumps(detailed_data), file_name="data.json", mime="text/json")
     for i, c in enumerate(calls):
-        st.write(c["url"])
+        if i < 5:
+            st.write(c["url"])
