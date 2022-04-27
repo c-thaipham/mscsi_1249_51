@@ -64,5 +64,7 @@ if st.button('Search'):
                 with st.container():
                     device_endpoint = d["url"]
                     device_data = get_data(ems_system, device_endpoint)
-                    st.json(device_data)
+                    ip_address = device_data["ipAddress"]
+
+                    st.subheader(f"IP Address: {ip_address}")
                 # st.download_button("Download data", data=json.dumps(detailed_data), file_name="data.json", mime="text/json")
