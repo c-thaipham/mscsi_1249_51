@@ -16,7 +16,7 @@ def validate_ip_address(address):
         return False
 
 def display_custom_text(message):
-    custom_text = f'<p style="font-family:sans serif; color:Red; font-size: 14px;">{message}</p>'
+    custom_text = f'<p style="font-family:sans-serif; color:Red; font-size: 20px;">{message}</p>'
     st.markdown(custom_text, unsafe_allow_html=True)
         
         
