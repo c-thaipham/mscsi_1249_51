@@ -82,4 +82,4 @@ if st.button('Search'):
         if not validate_ip_address(device):
             display_custom_text("Please enter a valid IP Address")
         else:
-            st.dataframe(devices_series)
+            st.table(devices_series)
