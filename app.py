@@ -4,6 +4,8 @@ import streamlit as st
 import requests
 import json
 from PIL import Image
+import pandas as pd
+import numpy as np
 
 def get_data(target, endpoint):
     response = requests.get(f"{target}{endpoint}", auth=basicAuthCredentials, verify=False)
@@ -18,6 +20,17 @@ def validate_ip_address(address):
 def display_custom_text(message):
     custom_text = f'<p style="font-family:sans-serif; color:Red; font-size: 20px;">{message}</p>'
     st.markdown(custom_text, unsafe_allow_html=True)
+
+def create_series(series_data:list):
+    data = np.array(series_data)
+    s = pd.Series(data)
+    return s
+
+def create_dataframe(**column_data):
+    data = {**column_data}
+    df = pd.DataFrame(data)
+    return df
+
         
         
     
@@ -52,7 +65,7 @@ calls_api_endpoint = '/ovoc/v1/callsMonitor/calls/'
 basicAuthCredentials = (st.secrets["ovoc_username"], st.secrets["ovoc_password"])
 
 device_placeholder = "e.g. 11.11.111.111 or  +16012345678"
-devices = get_data(ems_system, default_api_endpoint)["devices"]
+devices_series = create_series(d["url"] for d in [get_data(ems_system, default_api_endpoint)["devices"]])
 device = st.text_input("Find a Device", placeholder=device_placeholder)
 search_by = st.radio(
      "Search by",
@@ -65,51 +78,8 @@ if search_by in ['Source Number', 'Destination Number']:
     pass
 
 if st.button('Search'):
-    
-    
-    # st.subheader(f"Search Results")
-    # col1, col2, col3 = st.columns(3)
-    # col1.metric("Devices", f"{len(devices)}")
-    # col2.metric("Source Numbers", f"{0}")
-    # col3.metric("Destination Numbers", "10")
     if search_by == 'IP Address':
         if not validate_ip_address(device):
             display_custom_text("Please enter a valid IP Address")
         else:
-            # Find IP Address of the device and display it
-            for d in devices:
-                device_api_endpoint = d["url"]
-                device_data = get_data(ems_system, device_api_endpoint)
-                device_ip_address = device_data["ipAddress"]
-                            
-                if device_ip_address == device:
-                    with st.expander(f"{d['description']}"):
-                        with st.container():
-                            device_id = d['id']
-                            st.subheader(f"Device ID: {device_id}")
-                            st.subheader(f"IP Address: {device_ip_address}")
-
-                            calls = get_data(ems_system, calls_api_endpoint)["calls"]
-                            call_num = 0
-                            
-                            st.subheader("Calls Information")
-                            for c in calls:
-                                call_api_endpoint = c["url"]
-                                call_data = get_data(ems_system, call_api_endpoint)
-                                call_reporting_node_id = call_data["reportingNodeId"]
-                                
-                                
-                                if call_reporting_node_id == device_id:
-                                    if call_num < 3:
-                                        call_num += 1
-                                        st.json(call_data)
-                                    break
-                    break
-
-
-                # st.download_button("Download data", data=json.dumps(detailed_data), file_name="data.json", mime="text/json")
-    # for i, c in enumerate(calls):
-    #     if i < 5:
-    #         call_api_endpoint = c["url"]
-    #         call_data = get_data(ems_system, call_api_endpoint)
-    #         st.json(call_data)
+            st.dataframe(devices_series)
