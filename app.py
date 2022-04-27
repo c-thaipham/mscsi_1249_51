@@ -91,6 +91,8 @@ if st.button('Search'):
                         with st.container():
                             st.subheader(f"Device ID: {d['id']}")
                             st.subheader(f"IP Address: {device_ip_address}")
+                            with st.expander("Try"):
+                                st.write("Try")
                             
                     break
 
