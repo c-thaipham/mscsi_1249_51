@@ -39,7 +39,7 @@ basicAuthCredentials = (st.secrets["ovoc_username"], st.secrets["ovoc_password"]
 
 device_placeholder = "e.g. 11.11.111.111 or  +16012345678"
 devices = get_data(ems_system, default_api_endpoint)["devices"]
-calls = get_data(ems_system, calls_api_endpoint)["calls"]
+calls = get_data(ems_system, calls_api_endpoint)
 device = st.text_input("Search a Device", placeholder=device_placeholder)
 search_by = st.radio(
      "Search by",
@@ -70,4 +70,4 @@ if st.button('Search'):
 
 
                 # st.download_button("Download data", data=json.dumps(detailed_data), file_name="data.json", mime="text/json")
-    st.write(calls)
+    st.json(calls)
