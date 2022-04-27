@@ -67,7 +67,8 @@ if st.button('Search'):
     if search_by == 'IP Address':
         if device is None or device == '':
             device = default_ip_address
-        elif not validate_ip_address(device):
+            
+        if not validate_ip_address(device):
             st.write("Invalid IP Address")
         else:
             # Find IP Address of the device and display it
