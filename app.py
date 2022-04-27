@@ -63,8 +63,9 @@ request_method = 'GET'
 default_api_endpoint = '/ovoc/v1/topology/devices'
 calls_api_endpoint = '/ovoc/v1/callsMonitor/calls/'
 basicAuthCredentials = (st.secrets["ovoc_username"], st.secrets["ovoc_password"])
-
 device_placeholder = "e.g. 11.11.111.111 or  +16012345678"
+
+# Create a Pandas Series of devices
 devices_series = create_series([d["url"] for d in get_data(ems_system, default_api_endpoint)["devices"]])
 device = st.text_input("Find a Device", placeholder=device_placeholder)
 search_by = st.radio(
@@ -82,4 +83,5 @@ if st.button('Search'):
         if not validate_ip_address(device):
             display_custom_text("Please enter a valid IP Address")
         else:
-            st.write(devices_series)
+            st.write("In progress...")
+            # st.write(devices_series)
