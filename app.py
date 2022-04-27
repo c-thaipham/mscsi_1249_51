@@ -8,6 +8,11 @@ def get_data(target, endpoint):
     response = requests.get(f"{target}{endpoint}", auth=basicAuthCredentials, verify=False)
     return response.json()
 
+def validate_ip_address(address):
+    return ip_address(address)
+        
+    
+
 hide_menu_style = """
         <style>
         #MainMenu {visibility: hidden;}
@@ -47,30 +52,35 @@ search_by = st.radio(
     
 default_ip_address = "71.78.243.74"
     
-if search_by == 'IP Address':
-    pass
+
 if search_by in ['Source Number', 'Destination Number']:
     pass
 
 if st.button('Search'):
-
+    
+    
     # st.subheader(f"Search Results")
     # col1, col2, col3 = st.columns(3)
     # col1.metric("Devices", f"{len(devices)}")
     # col2.metric("Source Numbers", f"{0}")
     # col3.metric("Destination Numbers", "10")
-
-    # Find IP Address of the device and display it
-    for d in devices:
-        device_api_endpoint = d["url"]
-        device_data = get_data(ems_system, device_api_endpoint)
-        ip_address = device_data["ipAddress"]
-                    
-        if ip_address == default_ip_address:
-            with st.expander(f"{d['description']}"):
-                with st.container():
-                    st.subheader(f"IP Address: {ip_address}")
-            break
+    if search_by == 'IP Address':
+        if device is None or device == '':
+            device = default_ip_address
+        elif not validate_ip_address(device):
+            st.write("Invalid IP Address")
+        else:
+            # Find IP Address of the device and display it
+            for d in devices:
+                device_api_endpoint = d["url"]
+                device_data = get_data(ems_system, device_api_endpoint)
+                device_ip_address = device_data["ipAddress"]
+                            
+                if device_ip_address == device:
+                    with st.expander(f"{d['description']}"):
+                        with st.container():
+                            st.subheader(f"IP Address: {device_ip_address}")
+                    break
 
 
                 # st.download_button("Download data", data=json.dumps(detailed_data), file_name="data.json", mime="text/json")
