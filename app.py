@@ -14,6 +14,10 @@ def validate_ip_address(address):
         return ip_address(address)
     except ValueError:
         return False
+
+def display_custom_text(message):
+    custom_text = f'<p style="font-family:sans serif; color:Red; font-size: 14px;">{message}</p>'
+    st.markdown(custom_text, unsafe_allow_html=True)
         
         
     
@@ -74,7 +78,7 @@ if st.button('Search'):
             device = default_ip_address
 
         if not validate_ip_address(device):
-            st.write("Invalid IP Address")
+            display_custom_text("Invalid IP Address")
         else:
             # Find IP Address of the device and display it
             for d in devices:
