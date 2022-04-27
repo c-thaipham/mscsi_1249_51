@@ -73,9 +73,6 @@ if st.button('Search'):
     # col2.metric("Source Numbers", f"{0}")
     # col3.metric("Destination Numbers", "10")
     if search_by == 'IP Address':
-        if device is None or device == '':
-            device = default_ip_address
-
         if not validate_ip_address(device):
             display_custom_text("Please enter a valid IP Address")
         else:
