@@ -62,9 +62,12 @@ if st.button('Search'):
         if i < 5:
             with st.expander(f"{d['description']}"):
                 with st.container():
+                    # Find IP Address of the device and display it
                     device_endpoint = d["url"]
                     device_data = get_data(ems_system, device_endpoint)
                     ip_address = device_data["ipAddress"]
-
                     st.subheader(f"IP Address: {ip_address}")
+
+
                 # st.download_button("Download data", data=json.dumps(detailed_data), file_name="data.json", mime="text/json")
+    st.write(calls)
