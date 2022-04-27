@@ -53,7 +53,7 @@ basicAuthCredentials = (st.secrets["ovoc_username"], st.secrets["ovoc_password"]
 
 device_placeholder = "e.g. 11.11.111.111 or  +16012345678"
 devices = get_data(ems_system, default_api_endpoint)["devices"]
-# calls = get_data(ems_system, calls_api_endpoint)["calls"]
+calls = get_data(ems_system, calls_api_endpoint)["calls"]
 device = st.text_input("Find a Device", placeholder=device_placeholder)
 search_by = st.radio(
      "Search by",
@@ -91,8 +91,14 @@ if st.button('Search'):
                         with st.container():
                             st.subheader(f"Device ID: {d['id']}")
                             st.subheader(f"IP Address: {device_ip_address}")
-                            with st.expander("Try"):
-                                st.write("Try")
+
+                            for c in calls:
+                                call_api_endpoint = c["url"]
+                                call_data = get_data(ems_system, call_api_endpoint)
+                                st.json(call_data)
+                                break
+                                # call_reporting_node_id = call_data[""]
+                            
                             
                     break
 
