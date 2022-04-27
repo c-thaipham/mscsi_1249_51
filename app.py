@@ -91,18 +91,18 @@ if st.button('Search'):
                             device_id = d['id']
                             st.subheader(f"Device ID: {device_id}")
                             st.subheader(f"IP Address: {device_ip_address}")
-                            
+
                             calls = get_data(ems_system, calls_api_endpoint)["calls"]
 
-                            for c in calls:
-                                call_api_endpoint = c["url"]
-                                call_data = get_data(ems_system, call_api_endpoint)
-                                call_reporting_node_id = call_data["reportingNodeId"]
-
-                                if call_reporting_node_id == device_id:
-                                    st.json(call_data)
-                            
-                            
+                            for i, c in enumerate(calls):
+                                if i < 3:
+                                    call_api_endpoint = c["url"]
+                                    call_data = get_data(ems_system, call_api_endpoint)
+                                    call_reporting_node_id = call_data["reportingNodeId"]
+                                    st.subheader("Calls Information")
+                                    
+                                    if call_reporting_node_id == device_id:
+                                        st.json(call_data)
                     break
 
 
