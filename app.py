@@ -62,10 +62,7 @@ if st.button('Search'):
         if i < 5:
             with st.expander(f"{d['description']}"):
                 with st.container():
-                    st.json(d)
-                
-
-                # device_endpoint = d["url"]
-                # detailed_data = get_data(ems_system, device_endpoint)
-                # st.json(detailed_data)
+                    device_endpoint = d["url"]
+                    device_data = get_data(ems_system, device_endpoint)
+                    st.json(device_data)
                 # st.download_button("Download data", data=json.dumps(detailed_data), file_name="data.json", mime="text/json")
