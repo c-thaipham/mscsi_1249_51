@@ -89,15 +89,17 @@ if st.button('Search'):
                 if device_ip_address == device:
                     with st.expander(f"{d['description']}"):
                         with st.container():
-                            st.subheader(f"Device ID: {d['id']}")
+                            device_id = d['id']
+                            st.subheader(f"Device ID: {device_id}")
                             st.subheader(f"IP Address: {device_ip_address}")
 
                             for c in calls:
                                 call_api_endpoint = c["url"]
                                 call_data = get_data(ems_system, call_api_endpoint)
-                                st.json(call_data)
-                                break
-                                # call_reporting_node_id = call_data[""]
+                                call_reporting_node_id = call_data["reportingNodeId"]
+
+                                if call_reporting_node_id == device_id:
+                                    st.json(call_data)
                             
                             
                     break
